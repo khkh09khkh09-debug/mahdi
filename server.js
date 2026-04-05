@@ -55,6 +55,7 @@ app.get('/', (req, res) => {
         <div class="platform"><a href="https://youtube.com" style="color: #ff0;">يوتيوب</a></div>
         <div class="platform"><a href="/store" style="color: #ff0;">متجر النجوم</a></div>
         <div class="platform"><a href="/email" style="color: #ff0;">بريد النجم</a></div>
+        <div class="platform"><a href="/services" style="color: #ff0;">خدمات النجم</a></div>
       </div>
       <h2>التطبيقات</h2>
       ${apps.slice(0, 4).map(app => `
@@ -70,30 +71,24 @@ app.get('/', (req, res) => {
   `);
 });
 
-app.get('/store', (req, res) => {
+app.get('/services', (req, res) => {
   res.send(`
     <!DOCTYPE html>
     <html lang="ar" dir="rtl">
     <head>
       <meta charset="UTF-8">
-      <title>متجر تطبيقات النجوم</title>
-      <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background: linear-gradient(to bottom, #000, #001122); color: white; }
-        .app { border: 1px solid #fff; padding: 10px; margin: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; display: inline-block; width: 200px; }
-        button { background: #ff0; color: black; border: none; padding: 5px 10px; cursor: pointer; }
-      </style>
+      <title>خدمات النجم - Star Services</title>
+      <style>body { background: linear-gradient(to bottom, #000, #001122); color: white; margin: 20px; }</style>
     </head>
     <body>
-      <h1>متجر تطبيقات النجوم</h1>
-      <p>جميع التطبيقات مرتبطة بنظام النجوم.</p>
-      ${apps.map(app => `
-        <div class="app">
-          <h2>${app.name}</h2>
-          <p>${app.description}</p>
-          <p>عدد التحميلات: ${app.downloads}</p>
-          <a href="/download/${app.file}"><button>تحميل</button></a>
-        </div>
-      `).join('')}
+      <h1>خدمات النجم - Star Services</h1>
+      <p>خدمات مفعلة: بريد إلكتروني، عملة، خوارزميات، متصفح.</p>
+      <ul>
+        <li><a href="/email" style="color: #ff0;">بريد النجم</a></li>
+        <li><a href="/currency" style="color: #ff0;">عملة النجم</a></li>
+        <li><a href="/store" style="color: #ff0;">متجر النجم</a></li>
+        <li><a href="/browser" style="color: #ff0;">متصفح النجم</a></li>
+      </ul>
       <a href="/" style="color: #ff0;">العودة إلى نظام النجوم</a>
     </body>
     </html>
