@@ -23,7 +23,7 @@
 npm install
 npm start
 ```
-الوصول: http://localhost:3000
+الوصول: http://localhost:3000 أو النطاق العالمي alnajm.kikmo
 
 ## الترويج العالمي
 انشر الرابط على جميع المنصات: https://github.com/D-N-H-BOYS1/mahdi
