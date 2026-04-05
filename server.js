@@ -1,10 +1,21 @@
 const express = require('express');
 const path = require('path');
+const nodemailer = require('nodemailer');
 const app = express();
 const port = 3000;
 
 app.use(express.static('public'));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Email transporter (placeholder)
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'star.system@example.com',
+    pass: 'password'
+  }
+});
 
 const apps = [
   { id: 1, name: 'نظام النجوم - Star OS', description: 'نظام تشغيل عالمي متطور يعمل عن طريق النجوم', downloads: 100, file: 'es4.alnagm' },
@@ -22,16 +33,58 @@ app.get('/', (req, res) => {
     <html lang="ar" dir="rtl">
     <head>
       <meta charset="UTF-8">
-      <title>متجر تطبيقات النجوم</title>
+      <title>نظام النجوم - Star OS</title>
       <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background: linear-gradient(to bottom, #000, #001122); color: white; }
-        .app { border: 1px solid #fff; padding: 10px; margin: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: linear-gradient(to bottom, #000, #001122); color: white; text-align: center; }
+        .star { font-size: 3em; color: #ff0; animation: twinkle 2s infinite; }
+        @keyframes twinkle { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .platforms { margin: 20px; }
+        .platform { display: inline-block; margin: 10px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; }
+        .app { border: 1px solid #fff; padding: 10px; margin: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; display: inline-block; }
         button { background: #ff0; color: black; border: none; padding: 5px 10px; cursor: pointer; }
       </style>
     </head>
     <body>
-      <h1>متجر تطبيقات النجوم - بيئة رقمية جديدة</h1>
-      <p>استكشف تطبيقات نظام هواتف النجم وغيرها.</p>
+      <h1 class="star">🌟 نظام النجوم - Star OS 🌟</h1>
+      <p>نظام تشغيل عالمي متطور. الأنظمة القديمة معطلة، كل شي مرتبط بالنجوم.</p>
+      <div class="platforms">
+        <div class="platform"><a href="https://twitter.com" style="color: #ff0;">تويتر</a></div>
+        <div class="platform"><a href="https://facebook.com" style="color: #ff0;">فيسبوك</a></div>
+        <div class="platform"><a href="https://instagram.com" style="color: #ff0;">إنستغرام</a></div>
+        <div class="platform"><a href="https://youtube.com" style="color: #ff0;">يوتيوب</a></div>
+        <div class="platform"><a href="/store" style="color: #ff0;">متجر النجوم</a></div>
+        <div class="platform"><a href="/email" style="color: #ff0;">بريد النجم</a></div>
+      </div>
+      <h2>التطبيقات</h2>
+      ${apps.slice(0, 4).map(app => `
+        <div class="app">
+          <h3>${app.name}</h3>
+          <p>${app.description}</p>
+          <a href="/download/${app.file}"><button>تحميل</button></a>
+        </div>
+      `).join('')}
+      <p>انضم إلى الثورة النجمية!</p>
+    </body>
+    </html>
+  `);
+});
+
+app.get('/store', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="ar" dir="rtl">
+    <head>
+      <meta charset="UTF-8">
+      <title>متجر تطبيقات النجوم</title>
+      <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: linear-gradient(to bottom, #000, #001122); color: white; }
+        .app { border: 1px solid #fff; padding: 10px; margin: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; display: inline-block; width: 200px; }
+        button { background: #ff0; color: black; border: none; padding: 5px 10px; cursor: pointer; }
+      </style>
+    </head>
+    <body>
+      <h1>متجر تطبيقات النجوم</h1>
+      <p>جميع التطبيقات مرتبطة بنظام النجوم.</p>
       ${apps.map(app => `
         <div class="app">
           <h2>${app.name}</h2>
@@ -40,12 +93,68 @@ app.get('/', (req, res) => {
           <a href="/download/${app.file}"><button>تحميل</button></a>
         </div>
       `).join('')}
-      <script>
-        // Optional: track downloads
-      </script>
+      <a href="/" style="color: #ff0;">العودة إلى نظام النجوم</a>
     </body>
     </html>
   `);
+});
+
+app.get('/currency', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="ar" dir="rtl">
+    <head>
+      <meta charset="UTF-8">
+      <title>عملة النجم - Star Currency</title>
+      <style>body { background: linear-gradient(to bottom, #000, #001122); color: white; margin: 20px; }</style>
+    </head>
+    <body>
+      <h1>عملة النجم - Star Currency</h1>
+      <p>عملة مالية عالمية تعتمد على نظام النجوم.</p>
+      <a href="/" style="color: #ff0;">العودة إلى المتجر</a>
+    </body>
+    </html>
+  `);
+});
+
+app.get('/email', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="ar" dir="rtl">
+    <head>
+      <meta charset="UTF-8">
+      <title>بريد النجم - Star Email</title>
+      <style>body { background: linear-gradient(to bottom, #000, #001122); color: white; margin: 20px; }</style>
+    </head>
+    <body>
+      <h1>بريد النجم - Star Email</h1>
+      <form action="/send-email" method="post">
+        <label>إلى:</label><br><input type="email" name="to" required style="width: 100%;"><br>
+        <label>الموضوع:</label><br><input type="text" name="subject" required style="width: 100%;"><br>
+        <label>الرسالة:</label><br><textarea name="message" required style="width: 100%; height: 100px;"></textarea><br>
+        <button type="submit" style="background: #ff0; color: black; border: none; padding: 5px 10px;">إرسال</button>
+      </form>
+      <a href="/" style="color: #ff0;">العودة إلى المتجر</a>
+    </body>
+    </html>
+  `);
+});
+
+app.post('/send-email', (req, res) => {
+  const { to, subject, message } = req.body;
+  const mailOptions = {
+    from: 'star.system@example.com',
+    to,
+    subject,
+    text: message
+  };
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      res.send('<p style="color: red;">خطأ في الإرسال: ' + error.message + '</p><a href="/email">العودة</a>');
+    } else {
+      res.send('<p style="color: green;">تم إرسال البريد بنجاح!</p><a href="/email">العودة</a>');
+    }
+  });
 });
 
 app.get('/api/apps', (req, res) => {
