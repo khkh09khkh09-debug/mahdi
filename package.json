@@ -1,0 +1,13 @@
+{
+  "name": "mahdi-platform",
+  "version": "1.0.0",
+  "description": "Platform and store for displaying applications",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "license": "GPL-3.0"
+}
