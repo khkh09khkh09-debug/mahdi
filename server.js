@@ -1,3 +1,4 @@
+
 const express = require('express');
 const path = require('path');
 const nodemailer = require('nodemailer');
@@ -18,10 +19,10 @@ const transporter = nodemailer.createTransport({
 });
 
 const apps = [
-  { id: 1, name: 'نظام النجوم - Star OS', description: 'نظام تشغيل عالمي متطور يعمل عن طريق النجوم', downloads: 100, file: 'es4.alnagm' },
-  { id: 2, name: 'القلم النجمي - Star Pen', description: 'القلم الذي سوف يسطر كل العلوم المتطورة ويشفرها', downloads: 50, file: 'es5.alkalm' },
-  { id: 3, name: 'ميزات ES6 النجمية - Star ES6', description: 'شيفرة برمجية باستخدام ميزات ES6', downloads: 75, file: 'es6.ft' },
-  { id: 4, name: 'نظام هواتف النجم - Star Phones', description: 'نظام هواتف متطور يعمل بالنجوم', downloads: 200, file: 'e3.non' },
+  { id: 1, name: 'نظام النجوم - Star OS', description: 'نظام تشغيل عالمي متطور يعمل عن طريق النجوم', downloads: 100, file: 'star.os' },
+  { id: 2, name: 'القلم النجمي - Star Pen', description: 'القلم الذي سوف يسطر كل العلوم المتطورة ويشفرها', downloads: 50, file: 'star.pen' },
+  { id: 3, name: 'ميزات ES6 النجمية - Star ES6', description: 'شيفرة برمجية باستخدام ميزات ES6', downloads: 75, file: 'star.es6' },
+  { id: 4, name: 'نظام هواتف النجم - Star Phones', description: 'نظام هواتف متطور يعمل بالنجوم', downloads: 200, file: 'star.light' },
   { id: 5, name: 'عملة النجم - Star Currency', description: 'عملة مالية عالمية تعتمد على نظام النجوم', downloads: 150, file: 'star.currency.js' },
   { id: 6, name: 'خوارزميات النجم - Star Algorithms', description: 'خوارزميات متقدمة لنظام النجوم والعملات', downloads: 80, file: 'star.algorithms.js' },
   { id: 7, name: 'متصفح النجم - Star Browser', description: 'متصفح خاص بنظام النجوم للوصول العالمي', downloads: 120, file: 'star.browser.html' }
