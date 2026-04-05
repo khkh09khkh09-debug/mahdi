@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>متصفح النجم - Star Browser</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: linear-gradient(to bottom, #000, #001122); color: white; }
+    .navbar { background: #333; padding: 10px; }
+    .navbar input { width: 70%; padding: 5px; }
+    .navbar button { padding: 5px 10px; background: #ff0; color: black; border: none; }
+    iframe { width: 100%; height: calc(100vh - 50px); border: none; }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <input type="text" id="url" placeholder="أدخل رابطاً أو ابحث عن النجوم..." value="http://localhost:3000">
+    <button onclick="navigate()">اذهب</button>
+    <button onclick="search()">ابحث</button>
+  </div>
+  <iframe id="browser" src="http://localhost:3000"></iframe>
+  <script>
+    function navigate() {
+      const url = document.getElementById('url').value;
+      document.getElementById('browser').src = url;
+    }
+    function search() {
+      const query = document.getElementById('url').value;
+      document.getElementById('browser').src = `https://www.google.com/search?q=${encodeURIComponent(query)}+نجم`;
+    }
+  </script>
+</body>
+</html>
